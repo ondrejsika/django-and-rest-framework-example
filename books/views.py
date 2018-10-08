@@ -10,6 +10,9 @@ class AuthorList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly,
     )
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Author.objects.all()
@@ -25,6 +28,9 @@ class BookList(generics.ListCreateAPIView):
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
     )
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):

@@ -12,6 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 class AuthorSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
+
     class Meta:
         model = Author
         fields = (
@@ -22,6 +24,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
+
     class Meta:
         model = Book
         fields = (
@@ -33,7 +37,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 class BookFullSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
-    created_by = UserSerializer()
+    created_by = UserSerializer(read_only=True)
 
     class Meta:
         model = Book
