@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from .models import Author, Book
 from .serializers import AuthorSerializer, BookSerializer, BookFullSerializer
+from .permissions import HasPermissionsOrReadOnly
 
 
 class AuthorList(generics.ListCreateAPIView):
@@ -19,6 +20,7 @@ class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AuthorSerializer
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
+        HasPermissionsOrReadOnly,
     )
 
 
@@ -38,6 +40,7 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BookSerializer
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
+        HasPermissionsOrReadOnly,
     )
 
 
